@@ -1,0 +1,704 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.dully.zenbookmarks</string>
+	<key>connections</key>
+	<dict>
+		<key>1548B684-9B57-4C83-889B-7AB17368732A</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D0EB740F-5590-4BEA-AD30-5FC6944D1D8F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>44257FFC-200D-4323-8F39-A91B0B3E4DDC</key>
+		<array/>
+		<key>54226B46-76B4-420C-A3A4-E1CF01EE0BA9</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>44257FFC-200D-4323-8F39-A91B0B3E4DDC</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>BEED3746-BED9-432A-B0BA-975F0CBE0C31</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>C3D1DF97-8CAC-406E-809C-21996CBD8FB6</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>C3D1DF97-8CAC-406E-809C-21996CBD8FB6</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>67E49DF0-54A2-4035-AA2F-10ED582612D2</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>D0EB740F-5590-4BEA-AD30-5FC6944D1D8F</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>44257FFC-200D-4323-8F39-A91B0B3E4DDC</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>54226B46-76B4-420C-A3A4-E1CF01EE0BA9</string>
+				<key>modifiers</key>
+				<integer>1179648</integer>
+				<key>modifiersubtext</key>
+				<string>⇧⌘↩ Open in primary browser without closing Alfred</string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Dulanga Jayawardena</string>
+	<key>description</key>
+	<string>Search Zen bookmarks in Alfred</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Zen Bookmarks</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>0</integer>
+				<key>hotmod</key>
+				<integer>0</integer>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>1548B684-9B57-4C83-889B-7AB17368732A</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string># Secondary browser selection
+[[ "${bSecondary}" &amp;&amp; -n "${browser2}" ]] &amp;&amp; browser="${browser2}"
+
+# Primary browser selection
+[[ -z "${browser}" ]] &amp;&amp; open "${1}" || open -b "${browser}" "${1}"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>11</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>44257FFC-200D-4323-8F39-A91B0B3E4DDC</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>{var:zen_keyword}</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Loading...</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>search.sh</string>
+				<key>skipuniversalaction</key>
+				<true/>
+				<key>subtext</key>
+				<string>{const:alfred_workflow_description}</string>
+				<key>title</key>
+				<string>Search Bookmarks...</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>D0EB740F-5590-4BEA-AD30-5FC6944D1D8F</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.junction</string>
+			<key>uid</key>
+			<string>54226B46-76B4-420C-A3A4-E1CF01EE0BA9</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string># Secondary browser selection
+[[ "${bSecondary}" &amp;&amp; -n "${browser2}" ]] &amp;&amp; browser="${browser2}"
+
+# Primary browser selection
+[[ -z "${browser}" ]] &amp;&amp; open "${1}" || open -b "${browser}" "${1}"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>11</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>67E49DF0-54A2-4035-AA2F-10ED582612D2</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>0</integer>
+				<key>hotmod</key>
+				<integer>0</integer>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>BEED3746-BED9-432A-B0BA-975F0CBE0C31</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>{var:zen_history_keyword}</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Loading...</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>search_history.sh</string>
+				<key>skipuniversalaction</key>
+				<true/>
+				<key>subtext</key>
+				<string>{const:alfred_workflow_description}</string>
+				<key>title</key>
+				<string>Search Bookmarks...</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>C3D1DF97-8CAC-406E-809C-21996CBD8FB6</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>## Setup
+
+This workflow requires [jq](https://jqlang.github.io/jq/) to function, which now comes preinstalled on macOS Sequoia 15.0.0 and later.
+
+## Usage
+
+Search for your [Zen Browser](https://zen-browser.app/) bookmarks using the `bm` keyword.
+
+![Searching for Zen bookmarks](images/about/keyword.png)
+
+Type to refine your search. Bookmarks are always filtered by Name, while filtering by URL, Tags, Keyword, and bookmark description are configurable from the [Workflow’s Configuration](https://www.alfredapp.com/help/workflows/user-configuration/).
+
+![Narrowing search for Zen bookmarks](images/about/tagFilter.png)
+
+* &lt;kbd&gt;↩&lt;/kbd&gt; Open bookmark in primary browser
+* &lt;kbd&gt;⇧&lt;/kbd&gt;&lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;↩&lt;/kbd&gt; Open in primary browser without closing Alfred (when browser is in focus)
+* &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;↩&lt;/kbd&gt; Open bookmark in secondary browser
+* &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;C&lt;/kbd&gt; Copy bookmark URL
+* &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;L&lt;/kbd&gt; View all tags and full URL in Large Type
+* &lt;kbd&gt;⇧&lt;/kbd&gt; Hold to show bookmark description
+
+Configure the [Hotkey](https://www.alfredapp.com/help/workflows/triggers/hotkey/) as a shortcut to search for your bookmarks.
+
+Bookmarks with the tag `Exclude-Alfred` will be hidden from search. This tag is case sensitive.
+
+**Note**: Due to how Zen works, the bookmark file will not be refreshed when the browser is running (it places a lock on the db file). Restarting Zen will make all changes appear immediately.
+
+## Credits
+This workflow is based on the original Firefox Bookmarks workflow created by FireFingers21 at [FireFox Bookmarks](https://github.com/FireFingers21/alfred-firefox-bookmarks)</string>
+	<key>uidata</key>
+	<dict>
+		<key>1548B684-9B57-4C83-889B-7AB17368732A</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>15</real>
+		</dict>
+		<key>44257FFC-200D-4323-8F39-A91B0B3E4DDC</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>Open URL</string>
+			<key>xpos</key>
+			<real>450</real>
+			<key>ypos</key>
+			<real>15</real>
+		</dict>
+		<key>54226B46-76B4-420C-A3A4-E1CF01EE0BA9</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>xpos</key>
+			<real>355</real>
+			<key>ypos</key>
+			<real>95</real>
+		</dict>
+		<key>67E49DF0-54A2-4035-AA2F-10ED582612D2</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>Open URL</string>
+			<key>xpos</key>
+			<real>460</real>
+			<key>ypos</key>
+			<real>310</real>
+		</dict>
+		<key>BEED3746-BED9-432A-B0BA-975F0CBE0C31</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>8</integer>
+			<key>xpos</key>
+			<real>40</real>
+			<key>ypos</key>
+			<real>310</real>
+		</dict>
+		<key>C3D1DF97-8CAC-406E-809C-21996CBD8FB6</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>Main Action &amp; Keyword</string>
+			<key>xpos</key>
+			<real>190</real>
+			<key>ypos</key>
+			<real>310</real>
+		</dict>
+		<key>D0EB740F-5590-4BEA-AD30-5FC6944D1D8F</key>
+		<dict>
+			<key>colorindex</key>
+			<integer>2</integer>
+			<key>note</key>
+			<string>Main Action &amp; Keyword</string>
+			<key>xpos</key>
+			<real>180</real>
+			<key>ypos</key>
+			<real>15</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>z</string>
+				<key>placeholder</key>
+				<string>z</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Zen Keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>zen_keyword</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>zh</string>
+				<key>placeholder</key>
+				<string>zh</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Zen History Keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>zen_history_keyword</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<true/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>Search by Description</string>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Search Filters</string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>useDesc</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<true/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>Search by URL</string>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>useURL</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<true/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>Search by Keyword</string>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>useKeyword</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<true/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>Search by Tag</string>
+			</dict>
+			<key>description</key>
+			<string>Prefixing words with # filters by tag</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>useTag</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<false/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>Show all tags in subtitle</string>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Appearance</string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>showAllTags</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<true/>
+				<key>required</key>
+				<false/>
+				<key>text</key>
+				<string>Enable Quick Look</string>
+			</dict>
+			<key>description</key>
+			<string>Tap shift or ⌘Y to Quick Look bookmarks</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>checkbox</string>
+			<key>variable</key>
+			<string>useQL</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>System Default</string>
+						<string></string>
+					</array>
+					<array>
+						<string>Arc</string>
+						<string>company.thebrowser.Browser</string>
+					</array>
+					<array>
+						<string>Chromium</string>
+						<string>org.chromium.Chromium</string>
+					</array>
+					<array>
+						<string>Firefox</string>
+						<string>org.mozilla.firefox</string>
+					</array>
+					<array>
+						<string>Google Chrome</string>
+						<string>com.google.Chrome</string>
+					</array>
+					<array>
+						<string>Microsoft Edge</string>
+						<string>com.microsoft.edgemac</string>
+					</array>
+					<array>
+						<string>Opera</string>
+						<string>com.operasoftware.Opera</string>
+					</array>
+					<array>
+						<string>Orion</string>
+						<string>com.kagi.kagimacOS</string>
+					</array>
+					<array>
+						<string>Safari</string>
+						<string>com.apple.Safari</string>
+					</array>
+					<array>
+						<string>Zen</string>
+						<string>app.zen-browser.zen</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string>Primary browser for opening bookmarks</string>
+			<key>label</key>
+			<string>Default Browsers</string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>browser</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>&lt;None&gt;</string>
+						<string></string>
+					</array>
+					<array>
+						<string>Arc</string>
+						<string>company.thebrowser.Browser</string>
+					</array>
+					<array>
+						<string>Chromium</string>
+						<string>org.chromium.Chromium</string>
+					</array>
+					<array>
+						<string>Firefox</string>
+						<string>org.mozilla.firefox</string>
+					</array>
+					<array>
+						<string>Google Chrome</string>
+						<string>com.google.Chrome</string>
+					</array>
+					<array>
+						<string>Microsoft Edge</string>
+						<string>com.microsoft.edgemac</string>
+					</array>
+					<array>
+						<string>Opera</string>
+						<string>com.operasoftware.Opera</string>
+					</array>
+					<array>
+						<string>Orion</string>
+						<string>com.kagi.kagimacOS</string>
+					</array>
+					<array>
+						<string>Safari</string>
+						<string>com.apple.Safari</string>
+					</array>
+					<array>
+						<string>Zen</string>
+						<string>app.zen-browser.zen</string>
+					</array>
+				</array>
+			</dict>
+			<key>description</key>
+			<string>Secondary browser for opening bookmarks</string>
+			<key>label</key>
+			<string></string>
+			<key>type</key>
+			<string>popupbutton</string>
+			<key>variable</key>
+			<string>browser2</string>
+		</dict>
+	</array>
+	<key>version</key>
+	<string>2025.4</string>
+	<key>webaddress</key>
+	<string>https://github.com/dulangaj/alfred-zen-bookmarks</string>
+</dict>
+</plist>
