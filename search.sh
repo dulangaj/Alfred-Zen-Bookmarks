@@ -24,12 +24,9 @@ if [ -r "${bookmarks_file}" ]; then
   # Refresh the cache
   if cp "${bookmarks_file}" "${cache_file}" 2>/dev/null; then
     db_file="${cache_file}"
-  else
-    # If copy fails for some reason, at least use the live DB
-    db_file="${bookmarks_file}"
   fi
 elif [ -r "${cache_file}" ]; then
-  # Live DB is not readable (usually gets locked when Zen is running), so fall back to cache
+  # Live DB is not readable (gets locked when Zen is running), so fall back to cache
   db_file="${cache_file}"
 else
   # No live DB and no cache
@@ -48,7 +45,8 @@ EOF
 fi
 
 # Load Bookmarks from chosen DB
-sqlite3 -json "${db_file}" "${sqlQuery}" | jq -s \
+readonly db_uri="file:${db_file}?mode=ro&immutable=1" # prevent sqlite making lock files
+sqlite3 -json "${db_uri}" "${sqlQuery}" | jq -s \
   --arg useDesc "$useDesc" \
   --arg useURL "$useURL" \
   --arg useTag "$useTag" \

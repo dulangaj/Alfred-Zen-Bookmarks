@@ -34,32 +34,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>BEED3746-BED9-432A-B0BA-975F0CBE0C31</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>C3D1DF97-8CAC-406E-809C-21996CBD8FB6</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>C3D1DF97-8CAC-406E-809C-21996CBD8FB6</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>67E49DF0-54A2-4035-AA2F-10ED582612D2</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 		<key>D0EB740F-5590-4BEA-AD30-5FC6944D1D8F</key>
 		<array>
 			<dict>
@@ -209,113 +183,6 @@
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string># Secondary browser selection
-[[ "${bSecondary}" &amp;&amp; -n "${browser2}" ]] &amp;&amp; browser="${browser2}"
-
-# Primary browser selection
-[[ -z "${browser}" ]] &amp;&amp; open "${1}" || open -b "${browser}" "${1}"</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>11</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>67E49DF0-54A2-4035-AA2F-10ED582612D2</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>action</key>
-				<integer>0</integer>
-				<key>argument</key>
-				<integer>0</integer>
-				<key>focusedappvariable</key>
-				<false/>
-				<key>focusedappvariablename</key>
-				<string></string>
-				<key>hotkey</key>
-				<integer>0</integer>
-				<key>hotmod</key>
-				<integer>0</integer>
-				<key>leftcursor</key>
-				<false/>
-				<key>modsmode</key>
-				<integer>0</integer>
-				<key>relatedAppsMode</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.trigger.hotkey</string>
-			<key>uid</key>
-			<string>BEED3746-BED9-432A-B0BA-975F0CBE0C31</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<true/>
-				<key>alfredfiltersresultsmatchmode</key>
-				<integer>2</integer>
-				<key>argumenttreatemptyqueryasnil</key>
-				<true/>
-				<key>argumenttrimmode</key>
-				<integer>0</integer>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>keyword</key>
-				<string>{var:zen_history_keyword}</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<true/>
-				<key>queuedelaymode</key>
-				<integer>0</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>Loading...</string>
-				<key>script</key>
-				<string></string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string>search_history.sh</string>
-				<key>skipuniversalaction</key>
-				<true/>
-				<key>subtext</key>
-				<string>{const:alfred_workflow_description}</string>
-				<key>title</key>
-				<string>Search Bookmarks...</string>
-				<key>type</key>
-				<integer>8</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>C3D1DF97-8CAC-406E-809C-21996CBD8FB6</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string>## Setup
@@ -377,37 +244,6 @@ This workflow is based on the original Firefox Bookmarks workflow created by Fir
 			<real>355</real>
 			<key>ypos</key>
 			<real>95</real>
-		</dict>
-		<key>67E49DF0-54A2-4035-AA2F-10ED582612D2</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>note</key>
-			<string>Open URL</string>
-			<key>xpos</key>
-			<real>460</real>
-			<key>ypos</key>
-			<real>310</real>
-		</dict>
-		<key>BEED3746-BED9-432A-B0BA-975F0CBE0C31</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>8</integer>
-			<key>xpos</key>
-			<real>40</real>
-			<key>ypos</key>
-			<real>310</real>
-		</dict>
-		<key>C3D1DF97-8CAC-406E-809C-21996CBD8FB6</key>
-		<dict>
-			<key>colorindex</key>
-			<integer>2</integer>
-			<key>note</key>
-			<string>Main Action &amp; Keyword</string>
-			<key>xpos</key>
-			<real>190</real>
-			<key>ypos</key>
-			<real>310</real>
 		</dict>
 		<key>D0EB740F-5590-4BEA-AD30-5FC6944D1D8F</key>
 		<dict>
