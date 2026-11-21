@@ -1,10 +1,10 @@
 # Zen Bookmarks Search (Alfred Workflow)
 
-Search your Zen browser bookmarks via Alfred, with a built-in caching mechanism.
+Search your Zen browser bookmarks via Alfred.
 
 ## Description
 
-This Alfred workflow lets you instantly search bookmarks from the Zen browser profile. It adds a caching layer, since Zen locks the bookmarks database at startup, allowing the workflow to work using a recent snapshot.
+This Alfred workflow lets you instantly search bookmarks from the Zen browser profile. Zen locks its bookmarks database while running, so the workflow searches a private snapshot that refreshes whenever Zen saves a change.
 ## Features
 - Index bookmarks from the default profile of Zen (a Firefox fork)
 - Search by bookmark title, URL, tags, and description (set by webpage)
@@ -35,8 +35,7 @@ This Alfred workflow lets you instantly search bookmarks from the Zen browser pr
 
 
 ### Notes & Limitations
-- The workflow copies the database file - places.cached.sqlite - to its working directory, then uses that cached copy for searching, as Zen locks the db file during runtime
-- Bookmark changes might not appear instantly because of caching and WAL mode. Restarting Zen ensures full freshness
+- New bookmarks appear within about a minute: Alfred reuses results for 60 seconds while it reloads in the background
 - Only the default Zen profile is indexed. If you use multiple profiles, set one as default via Zen’s Profile Manager
 - The tag Exclude-Alfred (exactly that spelling and case) hides bookmarks from Alfred search results
 
