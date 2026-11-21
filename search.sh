@@ -1,15 +1,15 @@
 #!/bin/zsh --no-rcs
 
-# Automatically Get Bookmarks Database for Default Profile
+# Zen holds an exclusive lock on places.sqlite, so read a private snapshot
+# (main file + WAL) refreshed only when Zen has written since the last one.
 
 readonly releaseChannel="firefox"
-readonly versionCode="2656FF1E876E9973"
-
-readonly zenDefaultProfile=$(grep Default "${HOME}/Library/Application Support/zen/installs.ini" | cut -d"=" -f2)
-readonly bookmarks_file="${HOME}/Library/Application Support/zen/${zenDefaultProfile}/places.sqlite"
-
-# Cache file in the script's current working directory
-readonly cache_file="${PWD}/places.cached.sqlite"
+readonly zenDir="${HOME}/Library/Application Support/zen"
+readonly profile=$(awk -F= '/^Default=/ {print $2; exit}' "${zenDir}/installs.ini" 2>/dev/null)
+readonly src="${zenDir}/${profile}/places.sqlite"
+readonly cacheDir="${alfred_workflow_cache:-${TMPDIR}zenbookmarks}"
+readonly db="${cacheDir}/places.sqlite"
+readonly stamp="${cacheDir}/stamp"
 
 readonly sqlQuery="SELECT p.id, p.url, b.title, p.description, JSON_GROUP_ARRAY(DISTINCT t.title) AS tag_names
 FROM moz_places p
@@ -17,36 +17,34 @@ JOIN moz_bookmarks b ON b.fk = p.id
 JOIN moz_bookmarks t ON t.id = b.parent
 GROUP BY p.url;"
 
-# Decide which DB to use (live vs cached)
-db_file=""
+signature() { stat -f '%m %z' "${src}" "${src}-wal" 2>/dev/null }
 
-if [ -r "${bookmarks_file}" ]; then
-  # Refresh the cache
-  if cp "${bookmarks_file}" "${cache_file}" 2>/dev/null; then
-    db_file="${cache_file}"
-  fi
-elif [ -r "${cache_file}" ]; then
-  # Live DB is not readable (gets locked when Zen is running), so fall back to cache
-  db_file="${cache_file}"
-else
-  # No live DB and no cache
-  cat <<EOF
-{
-  "items": [
-    {
-      "title": "Bookmarks unavailable",
-      "subtitle": "Cannot read Zen bookmarks database or cache",
-      "valid": false
-    }
-  ]
+refresh() {
+	local tmp before
+	mkdir -p "${cacheDir}"
+	tmp=$(mktemp -d "${cacheDir}/tmp.XXXXXX") || return 1
+	for _ in 1 2 3; do
+		before=$(signature)
+		cp "${src}" "${tmp}/places.sqlite" || break
+		cp "${src}-wal" "${tmp}/places.sqlite-wal" 2>/dev/null
+		# Retry if Zen wrote or checkpointed mid-copy (mismatched main/WAL pair)
+		[[ "$(signature)" == "${before}" ]] || continue
+		# Fold the WAL into the snapshot so it is a single self-contained file
+		[[ "$(sqlite3 "${tmp}/places.sqlite" 'PRAGMA wal_checkpoint(TRUNCATE); PRAGMA journal_mode=DELETE; PRAGMA quick_check;' 2>/dev/null | tail -1)" == "ok" ]] || continue
+		mv -f "${tmp}/places.sqlite" "${db}" && print -r -- "${before}" > "${stamp}"
+		break
+	done
+	rm -rf "${tmp}"
 }
-EOF
-  exit 0
+
+[[ -r "${src}" && "$(signature)" != "$(<"${stamp}" 2>/dev/null)" ]] && refresh
+
+if [[ ! -r "${db}" ]]; then
+	print '{"items":[{"title":"Bookmarks unavailable","subtitle":"Cannot read the Zen bookmarks database","valid":false}]}'
+	exit 0
 fi
 
-# Load Bookmarks from chosen DB
-readonly db_uri="file:${db_file}?mode=ro&immutable=1" # prevent sqlite making lock files
-sqlite3 -json "${db_uri}" "${sqlQuery}" | jq -s \
+sqlite3 -json "file:${db}?mode=ro" "${sqlQuery}" | jq -s \
   --arg useDesc "$useDesc" \
   --arg useURL "$useURL" \
   --arg useTag "$useTag" \
@@ -55,6 +53,7 @@ sqlite3 -json "${db_uri}" "${sqlQuery}" | jq -s \
   --arg useQL "$useQL" \
   --arg useKeyword "$useKeyword" \
 '{
+    "cache": { "seconds": 60, "loosereload": true },
     "items": (if (length > 0) then
       map(.[] |
         (if .tag_names | contains("Exclude-Alfred") then empty else
