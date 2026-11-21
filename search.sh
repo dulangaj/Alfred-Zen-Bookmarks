@@ -17,34 +17,37 @@ JOIN moz_bookmarks b ON b.fk = p.id
 JOIN moz_bookmarks t ON t.id = b.parent
 GROUP BY p.url;"
 
-signature() { stat -f '%m %z' "${src}" "${src}-wal" 2>/dev/null }
+signature() { stat -f '%Fm %z' "${src}" "${src}-wal" 2>/dev/null }
 
 refresh() {
-	local tmp before
+	local before
 	mkdir -p "${cacheDir}"
+	rm -rf "${cacheDir}"/tmp.*(N)
 	tmp=$(mktemp -d "${cacheDir}/tmp.XXXXXX") || return 1
+	trap 'rm -rf "${tmp}"' EXIT INT TERM
 	for _ in 1 2 3; do
+		rm -f "${tmp}"/places.sqlite*(N)
 		before=$(signature)
-		cp "${src}" "${tmp}/places.sqlite" || break
-		cp "${src}-wal" "${tmp}/places.sqlite-wal" 2>/dev/null
+		cp -c "${src}" "${tmp}/places.sqlite" || return 1
+		cp -c "${src}-wal" "${tmp}/places.sqlite-wal" 2>/dev/null
 		# Retry if Zen wrote or checkpointed mid-copy (mismatched main/WAL pair)
 		[[ "$(signature)" == "${before}" ]] || continue
-		# Fold the WAL into the snapshot so it is a single self-contained file
-		[[ "$(sqlite3 "${tmp}/places.sqlite" 'PRAGMA wal_checkpoint(TRUNCATE); PRAGMA journal_mode=DELETE; PRAGMA quick_check;' 2>/dev/null | tail -1)" == "ok" ]] || continue
-		mv -f "${tmp}/places.sqlite" "${db}" && print -r -- "${before}" > "${stamp}"
-		break
+		# Fold the WAL in so the snapshot is one self-contained file
+		sqlite3 "${tmp}/places.sqlite" 'PRAGMA wal_checkpoint(TRUNCATE); PRAGMA journal_mode=DELETE; SELECT 1 FROM moz_bookmarks LIMIT 1;' >/dev/null 2>&1 || continue
+		print -r -- "${before}" > "${tmp}/stamp"
+		mv -f "${tmp}/stamp" "${stamp}" && mv -f "${tmp}/places.sqlite" "${db}"
+		return
 	done
-	rm -rf "${tmp}"
 }
 
-[[ -r "${src}" && "$(signature)" != "$(<"${stamp}" 2>/dev/null)" ]] && refresh
+[[ -r "${src}" && "$(signature)" != "$(cat "${stamp}" 2>/dev/null)" ]] && refresh
 
 if [[ ! -r "${db}" ]]; then
 	print '{"items":[{"title":"Bookmarks unavailable","subtitle":"Cannot read the Zen bookmarks database","valid":false}]}'
 	exit 0
 fi
 
-sqlite3 -json "file:${db}?mode=ro" "${sqlQuery}" | jq -s \
+sqlite3 -json -readonly "${db}" "${sqlQuery}" | jq -s \
   --arg useDesc "$useDesc" \
   --arg useURL "$useURL" \
   --arg useTag "$useTag" \
